@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Shuffle a Javascript Array</title>
+    <style type="text/css" media="screen">
+        th {font-weight: bold;}
+        td {text-align: right; background-color: #efefef;}
+        th {background-color: #e0e0e0; padding: 3px;}
+        .bias {background-color: orange;}
+        .strongbias {background-color: red;}
+        input {padding: 10px 10px; border-radius: 3px; border: 1px solid #ddd; line-height: 20px; background: -webkit-linear-gradient(top,#4387fd,#4683ea); cursor: pointer;font-size: 24px;color:#fff; margin-top: 20px;}
+    </style>
+</head>
+    <body>
+        <table id="results">
+            <tr>
+                <th style="background-color:#ccccff">Results</th>
+                <th>slot 0</th>
+                <th>slot 1</th>
+                <th>slot 2</th>
+                <th>slot 3</th>
+                <th>slot 4</th>
+                <th>slot 5</th>
+                <th>slot 6</th>
+                <th>slot 7</th>
+                <th>slot 8</th>
+                <th>slot 9</th>
+            </tr>
+            <tr>
+                <th>A's</th><td class="strongbias">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr>
+                <th>B's</th><td>0</td><td class="strongbias">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr>
+                <th>C's</th><td>0</td><td>0</td><td class="bias">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr>
+                <th>D's</th><td>0</td><td>0</td><td>0</td><td class="bias">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr>
+                <th>E's</th><td>0</td><td>0</td><td>0</td><td>0</td><td class="bias">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr>
+                <th>F's</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="bias">0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr>
+                <th>G's</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="bias">0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr>
+                <th>H's</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="bias">0</td><td>0</td><td>0</td>
+            </tr>
+            <tr>
+                <th>I's</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="strongbias">0</td><td>0</td>
+            </tr>
+            <tr>
+                <th>J's</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="strongbias">0</td>
+            </tr>
+        </table>
+        <div>
+            <input type="button" value="recalculate" onclick="recalc()">
+        </div>
+    </body>
+    <script>
+        var recalc = function() {
+            var countings = [
+                {A:0,B:0,C:0,D:0,E:0,F:0,G:0,H:0,I:0,J:0},
+                {A:0,B:0,C:0,D:0,E:0,F:0,G:0,H:0,I:0,J:0},
+                {A:0,B:0,C:0,D:0,E:0,F:0,G:0,H:0,I:0,J:0},
+                {A:0,B:0,C:0,D:0,E:0,F:0,G:0,H:0,I:0,J:0},
+                {A:0,B:0,C:0,D:0,E:0,F:0,G:0,H:0,I:0,J:0},
+                {A:0,B:0,C:0,D:0,E:0,F:0,G:0,H:0,I:0,J:0},
+                {A:0,B:0,C:0,D:0,E:0,F:0,G:0,H:0,I:0,J:0},
+                {A:0,B:0,C:0,D:0,E:0,F:0,G:0,H:0,I:0,J:0},
+                {A:0,B:0,C:0,D:0,E:0,F:0,G:0,H:0,I:0,J:0},
+                {A:0,B:0,C:0,D:0,E:0,F:0,G:0,H:0,I:0,J:0}
+            ];
+            var letters=['A','B','C','D','E','F','G','H','I','J'];
+            for (var i = 0; i < 10000; i++) {
+                var r = ['A','B','C','D','E','F','G','H','I','J'].sort(function() {
+                    return .5 - Math.random();
+                });
+                for(var j = 0; j <= 9; j++) {
+                    countings[j][r[j]]++;
+                }
+            }
+            for(var i = 0; i <= 9;i++) {
+                for(var j = 0;j <= 9;j++) {
+                    document.getElementById('results').rows[i + 1].cells[j + 1].firstChild.data = countings[i][letters[j]];
+                }
+            }
+        }
+        recalc();
+    </script>
+</html>
