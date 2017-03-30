@@ -107,6 +107,7 @@ Chrome’s v8 uses a combination of InsertionSort and QuickSort. That is, if the
 
 Step1：
 第一步需要做的就是，从数组末尾开始，选取最后一个元素。
+
 ![a2.png](http://upload-images.jianshu.io/upload_images/4363003-0565ce5089801f64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 在数组一共9个位置中，随机产生一个位置，该位置元素与最后一个元素进行交换。
